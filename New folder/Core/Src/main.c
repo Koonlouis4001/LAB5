@@ -54,6 +54,8 @@ UART_HandleTypeDef huart2;
 uint32_t capturedata[CAPTURENUM] = { 0 };
 //diff time of capture data
 int32_t DiffTime[CAPTURENUM-1] = { 0 };
+//speed motor rpm
+float speed = 0;
 //Mean difftime
 float MeanTime =0;
 uint32_t x = 0;
@@ -408,6 +410,7 @@ void encoderSpeedReaderCycle()
 
 	//mean all 15 Diff
 	MeanTime =sum / (float)(CAPTURENUM-1);
+	speed = (60*1000000)/(MeanTime * 12 * 64);
 }
 uint64_t micros()
 {
