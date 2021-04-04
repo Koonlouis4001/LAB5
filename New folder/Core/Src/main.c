@@ -32,7 +32,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define CAPTURENUM 32
+#define CAPTURENUM 16
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -53,7 +53,7 @@ UART_HandleTypeDef huart2;
 //DMA Buffer
 uint32_t capturedata[CAPTURENUM] = { 0 };
 //diff time of capture data
-int64_t DiffTime[CAPTURENUM-1] = { 0 };
+int32_t DiffTime[CAPTURENUM-1] = { 0 };
 //Mean difftime
 float MeanTime =0;
 uint32_t x = 0;
@@ -117,7 +117,7 @@ int main(void)
 
   //start Input capture in DMA
   HAL_TIM_Base_Start(&htim2);
-  HAL_TIM_IC_Start_DMA(&htim2, TIM_CHANNEL_1, (uint32_t*)capturedata, CAPTURENUM);
+  HAL_TIM_IC_Start_DMA(&htim2, TIM_CHANNEL_1, (uint32_t*) capturedata, CAPTURENUM);
 
   /* USER CODE END 2 */
 
@@ -402,11 +402,6 @@ void encoderSpeedReaderCycle()
 	for(register int i=0 ;i < CAPTURENUM-1;i++)
 	{
 		DiffTime[i]  = capturedata[(CapPos+1+i)%CAPTURENUM] - capturedata[(CapPos+i)%CAPTURENUM];
-		//time never go back, but timer can over flow , conpensate that
-		if (DiffTime[i] <0)
-		{
-			DiffTime[i]+=4294967295;
-		}
 		//Sum all 15 Diff
 		sum += DiffTime[i];
 	}
