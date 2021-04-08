@@ -410,7 +410,7 @@ int main(void)
   while (1)
   {
 
-	  if(micros()-timestamp > 200000)
+	  if(micros()-timestamp > 100000)
  8000508:	f000 faa6 	bl	8000a58 <micros>
  800050c:	4b10      	ldr	r3, [pc, #64]	; (8000550 <main+0x80>)
  800050e:	e9d3 2300 	ldrd	r2, r3, [r3]
@@ -437,14 +437,14 @@ int main(void)
 	  //read Time of encoder
 	  encoderSpeedReaderCycle();
  800053c:	f000 fa2c 	bl	8000998 <encoderSpeedReaderCycle>
-	  if(micros()-timestamp > 200000)
+	  if(micros()-timestamp > 100000)
  8000540:	e7e2      	b.n	8000508 <main+0x38>
  8000542:	bf00      	nop
  8000544:	20000120 	.word	0x20000120
  8000548:	20000168 	.word	0x20000168
  800054c:	2000002c 	.word	0x2000002c
  8000550:	200000b0 	.word	0x200000b0
- 8000554:	00030d40 	.word	0x00030d40
+ 8000554:	000186a0 	.word	0x000186a0
  8000558:	40020000 	.word	0x40020000
 
 0800055c <SystemClock_Config>:

@@ -128,7 +128,7 @@ int main(void)
   while (1)
   {
 
-	  if(micros()-timestamp > 200000)
+	  if(micros()-timestamp > 100000)
 	  {
 	  	timestamp = micros();
 	  	HAL_GPIO_TogglePin(LD2_GPIO_Port,LD2_Pin);
